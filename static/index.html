@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nayla - Sales Chatbot Hexxamind</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+        body { background: #0f172a; min-height: 100vh; display: flex; justify-content: center; align-items: center; }
+        .app-container {
+            width: 420px; height: 700px; background: #1e293b; border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); display: flex; flex-direction: column;
+            overflow: hidden; position: relative;
+        }
+        .header {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6); padding: 20px 24px;
+            display: flex; align-items: center; gap: 14px;
+        }
+        .header .avatar {
+            width: 48px; height: 48px; background: rgba(255,255,255,0.2); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-size: 24px;
+        }
+        .header .info h1 { color: #fff; font-size: 18px; font-weight: 700; letter-spacing: -0.3px; }
+        .header .info p { color: rgba(255,255,255,0.8); font-size: 13px; }
+        .header .badge {
+            margin-left: auto; background: rgba(255,255,255,0.2); color: #fff;
+            padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 600;
+        }
+        .chat-area {
+            flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 12px;
+        }
+        .chat-area::-webkit-scrollbar { width: 4px; }
+        .chat-area::-webkit-scrollbar-thumb { background: #475569; border-radius: 2px; }
+        .message {
+            max-width: 85%; padding: 12px 16px; border-radius: 16px; font-size: 14px;
+            line-height: 1.6; animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .message.bot {
+            align-self: flex-start; background: #334155; color: #e2e8f0;
+            border-bottom-left-radius: 4px;
+        }
+        .message.user {
+            align-self: flex-end; background: linear-gradient(135deg, #3b82f6, #6366f1); color: #fff;
+            border-bottom-right-radius: 4px;
+        }
+        .message.bot .typing-dots { display: flex; gap: 4px; padding: 4px 0; }
+        .message.bot .typing-dots span {
+            width: 8px; height: 8px; background: #94a3b8; border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+        .message.bot .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .message.bot .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typing { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-6px); } }
+        .quick-replies {
+            display: flex; flex-wrap: wrap; gap: 8px; padding: 0 20px 12px;
+        }
+        .quick-replies button {
+            background: #334155; color: #94a3b8; border: 1px solid #475569; padding: 6px 14px;
+            border-radius: 20px; font-size: 12px; cursor: pointer; transition: all 0.2s;
+        }
+        .quick-replies button:hover { background: #3b82f6; color: #fff; border-color: #3b82f6; }
+        .input-area {
+            padding: 16px 20px 20px; background: #1e293b; border-top: 1px solid #334155;
+            display: flex; gap: 10px;
+        }
+        .input-area input {
+            flex: 1; padding: 12px 16px; background: #334155; border: 1px solid #475569;
+            border-radius: 12px; color: #e2e8f0; font-size: 14px; outline: none; transition: border 0.2s;
+        }
+        .input-area input:focus { border-color: #3b82f6; }
+        .input-area input::placeholder { color: #64748b; }
+        .input-area button {
+            width: 46px; height: 46px; background: linear-gradient(135deg, #3b82f6, #6366f1);
+            border: none; border-radius: 12px; color: #fff; font-size: 20px; cursor: pointer;
+            transition: transform 0.2s, opacity 0.2s; display: flex; align-items: center; justify-content: center;
+        }
+        .input-area button:hover { transform: scale(1.05); }
+        .input-area button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .product-card {
+            background: #1e293b; border: 1px solid #3b82f6; border-radius: 12px; padding: 12px 16px;
+            margin-top: 8px; width: 100%;
+        }
+        .product-card h4 { color: #3b82f6; font-size: 13px; margin-bottom: 4px; }
+        .product-card p { color: #94a3b8; font-size: 12px; }
+        .product-card .price { color: #22c55e; font-weight: 700; font-size: 14px; margin-top: 4px; }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="header">
+            <div class="avatar">🤖</div>
+            <div class="info">
+                <h1>Nayla</h1>
+                <p>Sales Spesialis Hexxamind</p>
+            </div>
+            <div class="badge">● Online</div>
+        </div>
+
+        <div class="chat-area" id="chatArea">
+            <div class="message bot">
+                Halo! 👋 Saya <strong>Nayla</strong> dari <strong>Hexxamind</strong> — perusahaan milik Sunarno. 
+                Ada yang bisa saya bantu? Mau konsultasi gratis tentang website, aplikasi Android, Desktop, atau kebutuhan custom lainnya?
+            </div>
+        </div>
+
+        <div class="quick-replies" id="quickReplies">
+            <button onclick="sendQuick('Saya mau buat website')">🌐 Buat Website</button>
+            <button onclick="sendQuick('Saya mau buat aplikasi Android')">📱 Aplikasi Android</button>
+            <button onclick="sendQuick('Saya mau buat aplikasi Desktop')">💻 Aplikasi Desktop</button>
+            <button onclick="sendQuick('Saya mau konsultasi dulu')">🤝 Konsultasi Gratis</button>
+        </div>
+
+        <div class="input-area">
+            <input type="text" id="userInput" placeholder="Ketik pesan..." autofocus
+                   onkeypress="if(event.key==='Enter') sendMessage()">
+            <button id="sendBtn" onclick="sendMessage()">➤</button>
+        </div>
+    </div>
+
+    <script>
+        const chatArea = document.getElementById('chatArea');
+        const userInput = document.getElementById('userInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const sessionId = 'session_' + Date.now();
+
+        function addMessage(text, role) {
+            const div = document.createElement('div');
+            div.className = 'message ' + role;
+            div.innerHTML = text;
+            chatArea.appendChild(div);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+
+        function showTyping() {
+            const div = document.createElement('div');
+            div.className = 'message bot';
+            div.id = 'typingIndicator';
+            div.innerHTML = '<div class="typing-dots"><span></span><span></span><span></span></div>';
+            chatArea.appendChild(div);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+
+        function hideTyping() {
+            const el = document.getElementById('typingIndicator');
+            if (el) el.remove();
+        }
+
+        function setLoading(state) {
+            userInput.disabled = state;
+            sendBtn.disabled = state;
+        }
+
+        async function sendMessage() {
+            const msg = userInput.value.trim();
+            if (!msg) return;
+            userInput.value = '';
+            addMessage(msg, 'user');
+            setLoading(true);
+            showTyping();
+
+            try {
+                const res = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ session_id: sessionId, message: msg })
+                });
+                const data = await res.json();
+                hideTyping();
+                const formatted = data.reply.replace(/\n/g, '<br>');
+                addMessage(formatted, 'bot');
+            } catch (err) {
+                hideTyping();
+                addMessage('Maaf, terjadi gangguan koneksi. Silakan coba lagi.', 'bot');
+            } finally {
+                setLoading(false);
+                userInput.focus();
+            }
+        }
+
+        function sendQuick(text) {
+            userInput.value = text;
+            sendMessage();
+        }
+    </script>
+</body>
+</html>
