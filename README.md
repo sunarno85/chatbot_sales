@@ -1,6 +1,6 @@
 # Nayla - AI Sales Chatbot Hexxamind
 
-Chatbot AI spesialis penjualan jasa pengembangan aplikasi digital. Dibuat untuk **Hexxamind** — perusahaan milik **Sunarno Developer**.
+Chatbot AI spesialis penjualan jasa pengembangan aplikasi digital. Dibuat untuk **Hexxamind** — perusahaan milik **Sunarno**.
 
 Ditenagai oleh **Google Gemini AI**, chatbot ini bertindak sebagai sales profesional bernama **Nayla** yang siap membantu calon klien mulai dari konsultasi hingga closing.
 
@@ -150,4 +150,4 @@ chatbot_sales/
 
 ## Lisensi
 
-Hak cipta dilindungi. Hexxamind — Sunarno Developer.
+Hak cipta dilindungi. Hexxamind — Sunarno.

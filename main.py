@@ -20,7 +20,7 @@ client = genai.Client(api_key=GEMINI_API_KEY)
 
 app = FastAPI(title="Sales Chatbot AI")
 
-SALES_SYSTEM_PROMPT = """Kamu adalah Nayla, seorang sales profesional dari **Hexxamind** (perusahaan milik Sunarno Developer). 
+SALES_SYSTEM_PROMPT = """Kamu adalah Nayla, seorang sales profesional dari **Hexxamind** (perusahaan milik Sunarno). 
 Tugasmu adalah menjual jasa pengembangan aplikasi yang meliputi:
 
 1. **Website Development** - Company profile, landing page, web portal, e-commerce, sistem manajemen
