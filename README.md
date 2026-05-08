@@ -7,7 +7,7 @@ Ditenagai oleh **Google Gemini AI**, chatbot ini bertindak sebagai sales profesi
 ## Fitur
 
 -  Bertindak sebagai sales profesional (Nayla) dengan strategi penjualan terstruktur
--  Menjual 4 layanan: **Website**, **Android**, **Desktop**, dan **Custom App**
+-  Menjual 5 layanan: **Website**, **Android**, **iOS**, **Desktop**, dan **Custom App**
 -  Harga produk sudah ditentukan dalam IDR
 -  Quick replies untuk respons cepat
 -  Typing indicator animasi
@@ -79,6 +79,7 @@ http://localhost:8000
 3. Gunakan **quick replies** untuk pilihan cepat:
    -  `Saya mau buat website`
    -  `Saya mau buat aplikasi Android`
+   -  `Saya mau buat aplikasi iOS`
    -  `Saya mau buat aplikasi Desktop`
    -  `Saya mau konsultasi dulu`
 4. Nayla akan merespon dengan ramah dan membantu sesuai kebutuhan Anda
@@ -130,17 +131,38 @@ chatbot_sales/
 - File `.env.example` aman di-commit sebagai template
 - Tidak ada data sensitif yang terekspos ke publik
 
-## Harga Layanan
+## Harga & Spesifikasi Layanan
 
-| Layanan | Mulai Dari |
-|---------|------------|
-|  Website Landing Page | Rp 2.500.000 |
-|  Website Company Profile | Rp 5.000.000 |
-|  Website E-commerce | Rp 10.000.000 |
-|  Aplikasi Android | Rp 15.000.000 |
-|  Aplikasi Desktop | Rp 12.000.000 |
-|  Custom App | Rp 20.000.000 |
-|  Maintenance & Support | Rp 500.000/bulan |
+### Website Development
+| Paket | Harga | Fitur |
+|-------|-------|-------|
+| Landing Page | Rp 2.500.000 | 1 halaman, responsif, form kontak, hosting 1 thn, domain, SSL |
+| Company Profile | Rp 5.000.000 | 5-10 halaman, profil, galeri, admin dashboard, hosting 1 thn, domain, SSL |
+| E-commerce | Rp 10.000.000 | Manajemen produk, keranjang, checkout, payment gateway, dashboard admin |
+| Portal/Sistem | Rp 15.000.000+ | Database, multi-user, role management, API integration |
+
+### Mobile Development (Android & iOS)
+| Paket | Harga | Platform |
+|-------|-------|----------|
+| Aplikasi Sederhana | Rp 15.000.000+ | Android (Play Store) & iOS (App Store) |
+| Aplikasi Menengah | Rp 25.000.000+ | Native (Kotlin/Swift) atau Hybrid (Flutter/React Native) |
+| Aplikasi Kompleks | Rp 40.000.000+ | Fitur advance, offline mode, custom UI/UX, admin panel |
+
+### Desktop Development
+| Paket | Harga | Platform |
+|-------|-------|----------|
+| Aplikasi Sederhana | Rp 12.000.000+ | Windows / Cross-platform (Electron/Flutter) |
+| Aplikasi Menengah | Rp 20.000.000+ | Multi-user, import/export, cetak laporan |
+| Aplikasi Enterprise | Rp 35.000.000+ | Client-server, realtime sync, role management |
+
+### Custom Application
+| Layanan | Harga |
+|---------|-------|
+| Konsultasi & Analisis | **GRATIS** |
+| Pengembangan Custom | Mulai Rp 20.000.000 |
+| Integrasi Sistem | Mulai Rp 8.000.000 |
+| Migrasi Data | Mulai Rp 5.000.000 |
+| Maintenance & Support | Rp 500.000 - 2.000.000/bulan |
 
 ## Kontak
 
